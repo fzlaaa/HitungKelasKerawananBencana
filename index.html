@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Parameter dan Kelas Kerawanan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 25px auto;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #d9d9d9;
+            font-weight: bold;
+        }
+        td {
+            vertical-align: middle;
+        }
+        td:first-child {
+            background-color: #e6e6e6;
+            text-align: left;
+            width: 45%;
+        }
+        input[type="number"] {
+            width: 100%;
+            box-sizing: border-box;
+            border: none;
+            background-color: transparent;
+            text-align: right;
+            font-size: 16px;
+        }
+        input[type="number"]:focus {
+            outline: none;
+            background-color: #eef5ff;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+        .readonly-cell {
+            background-color: #f9f9f9;
+            text-align: center;
+            font-weight: bold;
+        }
+        h3 {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 8px auto;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <h3>Tabel Parameter & Bobot</h3>
+    <table>
+        <thead>
+            <tr>
+                <th rowspan="2">Parameter</th>
+                <th colspan="2">Skor</th>
+                <th rowspan="2">Bobot</th>
+            </tr>
+            <tr>
+                <th>Terendah</th>
+                <th>Tertinggi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Kemiringan Lereng</td>
+                <td><input type="number" class="s-min"></td>
+                <td><input type="number" class="s-max"></td>
+                <td><input type="number" class="weight"></td>
+            </tr>
+            <tr>
+                <td>Jenis Tanah</td>
+                <td><input type="number" class="s-min"></td>
+                <td><input type="number" class="s-max"></td>
+                <td><input type="number" class="weight"></td>
+            </tr>
+            <tr>
+                <td>Curah Hujan</td>
+                <td><input type="number" class="s-min"></td>
+                <td><input type="number" class="s-max"></td>
+                <td><input type="number" class="weight"></td>
+            </tr>
+            <tr>
+                <td>Penggunaan Lahan</td>
+                <td><input type="number" class="s-min"></td>
+                <td><input type="number" class="s-max"></td>
+                <td><input type="number" class="weight"></td>
+            </tr>
+            <tr>
+                <td>Geologi</td>
+                <td><input type="number" class="s-min"></td>
+                <td><input type="number" class="s-max"></td>
+                <td><input type="number" class="weight"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Tabel Kelas Kerawanan (Otomatis)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Kelas Kerawanan</th>
+                <th>Skor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Sangat Rendah</td>
+                <td class="readonly-cell" id="sr-score">-</td>
+            </tr>
+            <tr>
+                <td>Rendah</td>
+                <td class="readonly-cell" id="r-score">-</td>
+            </tr>
+            <tr>
+                <td>Sedang</td>
+                <td class="readonly-cell" id="sd-score">-</td>
+            </tr>
+            <tr>
+                <td>Tinggi</td>
+                <td class="readonly-cell" id="t-score">-</td>
+            </tr>
+            <tr>
+                <td>Sangat Tinggi</td>
+                <td class="readonly-cell" id="st-score">-</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        const sMinInputs = document.querySelectorAll('.s-min');
+        const sMaxInputs = document.querySelectorAll('.s-max');
+        const weightInputs = document.querySelectorAll('.weight');
+
+        function calculateTable2() {
+            let totalMin = 0;
+            let totalMax = 0;
+
+            for (let i = 0; i < 5; i++) {
+                let sMin = parseFloat(sMinInputs[i].value) || 0;
+                let sMax = parseFloat(sMaxInputs[i].value) || 0;
+                let weight = parseFloat(weightInputs[i].value) || 0;
+
+                totalMin += sMin * weight;
+                totalMax += sMax * weight;
+            }
+
+            // Menghitung nilai X
+            const x = (totalMax - totalMin) / 5;
+
+            // Jika belum ada input, kosongkan tabel 2
+            if (totalMin === 0 && totalMax === 0) {
+                document.getElementById('sr-score').innerText = '-';
+                document.getElementById('r-score').innerText = '-';
+                document.getElementById('sd-score').innerText = '-';
+                document.getElementById('t-score').innerText = '-';
+                document.getElementById('st-score').innerText = '-';
+                return;
+            }
+
+            // Kelas 1: Sangat Rendah
+            let srMin = Math.round(totalMin);
+            let srMax = Math.round(totalMin + x);
+            document.getElementById('sr-score').innerText = srMin + ' - ' + srMax;
+
+            // Kelas 2: Rendah
+            let rMin = srMax + 1;
+            let rMax = Math.round(srMax + x);
+            document.getElementById('r-score').innerText = rMin + ' - ' + rMax;
+
+            // Kelas 3: Sedang
+            let sdMin = rMax + 1;
+            let sdMax = Math.round(rMax + x);
+            document.getElementById('sd-score').innerText = sdMin + ' - ' + sdMax;
+
+            // Kelas 4: Tinggi
+            let tMin = sdMax + 1;
+            let tMax = Math.round(sdMax + x);
+            document.getElementById('t-score').innerText = tMin + ' - ' + tMax;
+
+            // Kelas 5: Sangat Tinggi (Diubah menjadi format ≥ angka kiri)
+            let stMin = tMax + 1;
+            document.getElementById('st-score').innerText = '≥ ' + stMin;
+        }
+
+        sMinInputs.forEach(input => input.addEventListener('input', calculateTable2));
+        sMaxInputs.forEach(input => input.addEventListener('input', calculateTable2));
+        weightInputs.forEach(input => input.addEventListener('input', calculateTable2));
+    </script>
+</body>
+</html>
