@@ -10,13 +10,21 @@
             padding: 20px;
             background-color: #f9f9f9;
         }
-        table {
-            border-collapse: collapse;
+        
+        /* Kontainer untuk membuat tabel responsif (bisa digeser di mobile) */
+        .table-container {
             width: 100%;
             max-width: 600px;
             margin: 0 auto 25px auto;
+            overflow-x: auto; /* Memungkinkan scrolling horizontal di layar kecil */
             background-color: white;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            min-width: 500px; /* Memaksa lebar minimum tabel agar tidak hancur di mobile */
         }
         th, td {
             border: 1px solid #000;
@@ -73,9 +81,9 @@
             bottom: 15px;
             right: 20px;
             font-size: 14px;
-            color: rgba(0, 0, 0, 0.4); /* Warna abu-abu transparan */
+            color: rgba(0, 0, 0, 0.4);
             font-weight: bold;
-            pointer-events: none; /* Agar tidak menghalangi klik jika ada elemen di bawahnya */
+            pointer-events: none;
             z-index: 1000;
         }
     </style>
@@ -83,83 +91,87 @@
 <body>
 
     <h3>Tabel Parameter & Bobot</h3>
-    <table>
-        <thead>
-            <tr>
-                <th rowspan="2">Parameter</th>
-                <th colspan="2">Skor</th>
-                <th rowspan="2">Bobot</th>
-            </tr>
-            <tr>
-                <th>Terendah</th>
-                <th>Tertinggi</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Kemiringan Lereng</td>
-                <td><input type="number" class="s-min"></td>
-                <td><input type="number" class="s-max"></td>
-                <td><input type="number" class="weight"></td>
-            </tr>
-            <tr>
-                <td>Jenis Tanah</td>
-                <td><input type="number" class="s-min"></td>
-                <td><input type="number" class="s-max"></td>
-                <td><input type="number" class="weight"></td>
-            </tr>
-            <tr>
-                <td>Curah Hujan</td>
-                <td><input type="number" class="s-min"></td>
-                <td><input type="number" class="s-max"></td>
-                <td><input type="number" class="weight"></td>
-            </tr>
-            <tr>
-                <td>Penggunaan Lahan</td>
-                <td><input type="number" class="s-min"></td>
-                <td><input type="number" class="s-max"></td>
-                <td><input type="number" class="weight"></td>
-            </tr>
-            <tr>
-                <td>Geologi</td>
-                <td><input type="number" class="s-min"></td>
-                <td><input type="number" class="s-max"></td>
-                <td><input type="number" class="weight"></td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">Parameter</th>
+                    <th colspan="2">Skor</th>
+                    <th rowspan="2">Bobot</th>
+                </tr>
+                <tr>
+                    <th>Terendah</th>
+                    <th>Tertinggi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Kemiringan Lereng</td>
+                    <td><input type="number" class="s-min"></td>
+                    <td><input type="number" class="s-max"></td>
+                    <td><input type="number" class="weight"></td>
+                </tr>
+                <tr>
+                    <td>Jenis Tanah</td>
+                    <td><input type="number" class="s-min"></td>
+                    <td><input type="number" class="s-max"></td>
+                    <td><input type="number" class="weight"></td>
+                </tr>
+                <tr>
+                    <td>Curah Hujan</td>
+                    <td><input type="number" class="s-min"></td>
+                    <td><input type="number" class="s-max"></td>
+                    <td><input type="number" class="weight"></td>
+                </tr>
+                <tr>
+                    <td>Penggunaan Lahan</td>
+                    <td><input type="number" class="s-min"></td>
+                    <td><input type="number" class="s-max"></td>
+                    <td><input type="number" class="weight"></td>
+                </tr>
+                <tr>
+                    <td>Geologi</td>
+                    <td><input type="number" class="s-min"></td>
+                    <td><input type="number" class="s-max"></td>
+                    <td><input type="number" class="weight"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
     <h3>Tabel Kelas Kerawanan (Otomatis)</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Kelas Kerawanan</th>
-                <th>Skor</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Sangat Rendah</td>
-                <td class="readonly-cell" id="sr-score">-</td>
-            </tr>
-            <tr>
-                <td>Rendah</td>
-                <td class="readonly-cell" id="r-score">-</td>
-            </tr>
-            <tr>
-                <td>Sedang</td>
-                <td class="readonly-cell" id="sd-score">-</td>
-            </tr>
-            <tr>
-                <td>Tinggi</td>
-                <td class="readonly-cell" id="t-score">-</td>
-            </tr>
-            <tr>
-                <td>Sangat Tinggi</td>
-                <td class="readonly-cell" id="st-score">-</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Kelas Kerawanan</th>
+                    <th>Skor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Sangat Rendah</td>
+                    <td class="readonly-cell" id="sr-score">-</td>
+                </tr>
+                <tr>
+                    <td>Rendah</td>
+                    <td class="readonly-cell" id="r-score">-</td>
+                </tr>
+                <tr>
+                    <td>Sedang</td>
+                    <td class="readonly-cell" id="sd-score">-</td>
+                </tr>
+                <tr>
+                    <td>Tinggi</td>
+                    <td class="readonly-cell" id="t-score">-</td>
+                </tr>
+                <tr>
+                    <td>Sangat Tinggi</td>
+                    <td class="readonly-cell" id="st-score">-</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
     <div class="watermark">Follow me, IG : @fzl_faa.</div>
 
@@ -214,7 +226,7 @@
             let tMax = Math.round(sdMax + x);
             document.getElementById('t-score').innerText = tMin + ' - ' + tMax;
 
-            // Kelas 5: Sangat Tinggi (Diubah menjadi format ≥ angka kiri)
+            // Kelas 5: Sangat Tinggi
             let stMin = tMax + 1;
             document.getElementById('st-score').innerText = '≥ ' + stMin;
         }
