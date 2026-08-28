@@ -66,6 +66,18 @@
             margin: 0 auto 8px auto;
             color: #333;
         }
+        
+        /* CSS untuk Watermark */
+        .watermark {
+            position: fixed;
+            bottom: 15px;
+            right: 20px;
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.4); /* Warna abu-abu transparan */
+            font-weight: bold;
+            pointer-events: none; /* Agar tidak menghalangi klik jika ada elemen di bawahnya */
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
@@ -148,6 +160,8 @@
             </tr>
         </tbody>
     </table>
+
+    <div class="watermark">Follow me, IG : @fzl_faa.</div>
 
     <script>
         const sMinInputs = document.querySelectorAll('.s-min');
