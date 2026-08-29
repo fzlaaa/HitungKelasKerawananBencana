@@ -16,7 +16,7 @@
             width: 100%;
             max-width: 600px;
             margin: 0 auto 25px auto;
-            overflow-x: auto; /* Memungkinkan scrolling horizontal di layar kecil */
+            overflow-x: auto;
             background-color: white;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
@@ -24,7 +24,7 @@
         table {
             border-collapse: collapse;
             width: 100%;
-            min-width: 500px; /* Memaksa lebar minimum tabel agar tidak hancur di mobile */
+            min-width: 500px;
         }
         th, td {
             border: 1px solid #000;
@@ -75,7 +75,7 @@
             color: #333;
         }
         
-        /* CSS untuk Watermark */
+        /* CSS untuk Watermark Link */
         .watermark {
             position: fixed;
             bottom: 15px;
@@ -83,8 +83,14 @@
             font-size: 14px;
             color: rgba(0, 0, 0, 0.4);
             font-weight: bold;
-            pointer-events: none;
+            text-decoration: none; /* Menghilangkan garis bawah bawaan link */
             z-index: 1000;
+            transition: color 0.3s ease; /* Transisi halus saat warna berubah */
+        }
+        
+        /* Efek saat cursor diarahkan ke tulisan */
+        .watermark:hover {
+            color: rgba(0, 0, 0, 0.8);
         }
     </style>
 </head>
@@ -173,7 +179,7 @@
         </table>
     </div>
 
-    <div class="watermark">Follow me, IG : @fzl_faa</div>
+    <a href="https://www.instagram.com/fzl_faa/" target="_blank" rel="noopener noreferrer" class="watermark">Follow me, IG : @fzl_faa.</a>
 
     <script>
         const sMinInputs = document.querySelectorAll('.s-min');
@@ -193,10 +199,8 @@
                 totalMax += sMax * weight;
             }
 
-            // Menghitung nilai X
             const x = (totalMax - totalMin) / 5;
 
-            // Jika belum ada input, kosongkan tabel 2
             if (totalMin === 0 && totalMax === 0) {
                 document.getElementById('sr-score').innerText = '-';
                 document.getElementById('r-score').innerText = '-';
@@ -206,27 +210,22 @@
                 return;
             }
 
-            // Kelas 1: Sangat Rendah
             let srMin = Math.round(totalMin);
             let srMax = Math.round(totalMin + x);
             document.getElementById('sr-score').innerText = srMin + ' - ' + srMax;
 
-            // Kelas 2: Rendah
             let rMin = srMax + 1;
             let rMax = Math.round(srMax + x);
             document.getElementById('r-score').innerText = rMin + ' - ' + rMax;
 
-            // Kelas 3: Sedang
             let sdMin = rMax + 1;
             let sdMax = Math.round(rMax + x);
             document.getElementById('sd-score').innerText = sdMin + ' - ' + sdMax;
 
-            // Kelas 4: Tinggi
             let tMin = sdMax + 1;
             let tMax = Math.round(sdMax + x);
             document.getElementById('t-score').innerText = tMin + ' - ' + tMax;
 
-            // Kelas 5: Sangat Tinggi
             let stMin = tMax + 1;
             document.getElementById('st-score').innerText = '≥ ' + stMin;
         }
