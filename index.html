@@ -17,19 +17,19 @@
             margin: 0 auto 25px auto;
             background-color: white;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            overflow: hidden; /* Mencegah elemen keluar dari kotak */
+            overflow: hidden; 
         }
 
         table {
             border-collapse: collapse;
             width: 100%;
-            table-layout: fixed; /* Membantu membagi lebar kolom secara proporsional */
+            table-layout: fixed; 
         }
         th, td {
             border: 1px solid #000;
             padding: 8px 12px;
             text-align: center;
-            word-wrap: break-word; /* Mencegah teks panjang merusak tabel */
+            word-wrap: break-word; 
         }
         th {
             background-color: #d9d9d9;
@@ -45,11 +45,11 @@
         }
         input[type="number"] {
             width: 100%;
-            min-width: 0; /* Penting agar input bisa mengecil di layar sempit */
+            min-width: 0; 
             box-sizing: border-box;
             border: none;
             background-color: transparent;
-            text-align: right;
+            text-align: center; /* Diubah menjadi center agar angka di tengah */
             font-size: 16px;
         }
         input[type="number"]:focus {
@@ -96,23 +96,23 @@
         /* ----- PENGATURAN KHUSUS UNTUK LAYAR HP (MOBILE) ----- */
         @media screen and (max-width: 500px) {
             body {
-                padding: 10px; /* Mengurangi jarak pinggir layar */
+                padding: 10px; 
             }
             th, td {
-                padding: 4px; /* Mengurangi jarak dalam kotak tabel */
-                font-size: 12px; /* Mengecilkan ukuran huruf agar muat */
+                padding: 4px; 
+                font-size: 12px; 
             }
             input[type="number"] {
-                font-size: 12px; /* Mengecilkan angka input */
+                font-size: 12px; 
             }
             h3 {
-                font-size: 16px; /* Mengecilkan judul */
+                font-size: 16px; 
             }
             td:first-child {
-                width: 35%; /* Menyesuaikan lebar kolom pertama di HP */
+                width: 35%; 
             }
             .watermark {
-                font-size: 12px; /* Mengecilkan watermark di HP */
+                font-size: 12px; 
                 bottom: 10px;
                 right: 10px;
             }
@@ -204,7 +204,7 @@
         </table>
     </div>
 
-    <a href="https://www.instagram.com/fzl_faa/" target="_blank" rel="noopener noreferrer" class="watermark">Follow me, IG : @fzl_faa</a>
+    <a href="https://www.instagram.com/fzl_faa/" target="_blank" rel="noopener noreferrer" class="watermark">Follow me, IG : @fzl_faa.</a>
 
     <script>
         const sMinInputs = document.querySelectorAll('.s-min');
